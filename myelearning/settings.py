@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY', 'dummy_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', 'True', cast=bool)
 
-ALLOWED_HOSTS = ['*','elearning-dominatiors.azurewebsites.net']
+ALLOWED_HOSTS = ['*','elearningdominators.azurewebsites.net']
 
 
 # Application definition
@@ -109,17 +109,27 @@ SITE_ID = 1
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'elearning',
+#         'USER': 'postgres',
+#         'PASSWORD': '1234',
+#         'PORT': '5432',
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'elearning',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
+        'USER': 'elearning_admin@elearningserver',
+        'PASSWORD': 'Dominators123',
         'PORT': '5432',
-        'HOST': 'localhost'
+        'HOST': 'elearningserver.postgres.database.azure.com'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

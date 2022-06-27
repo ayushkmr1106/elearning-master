@@ -24,7 +24,7 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_TIMEOUT = 500
 
-ALLOWED_HOSTS = ['*','http://elearning-dominatiors.azurewebsites.net/']
+ALLOWED_HOSTS = ['*','elearning-dominatiors.azurewebsites.net']
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

@@ -52,7 +52,7 @@ class StudentSignupForm(UserCreationForm):
         label='',
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple(attrs={'class':'mt-4 form-control'}),
-        required=True
+        required=False
     )
 
     class Meta(UserCreationForm.Meta):

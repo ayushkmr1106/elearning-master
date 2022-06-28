@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'opencensus.ext.django.middleware.OpencensusMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -217,7 +218,7 @@ REST_FRAMEWORK = {
 }
 
 # Mailer
-DEFAULT_FROM_EMAIL = config('ADMIN_EMAIL', 'no-reply@myelearnig.com')
+DEFAULT_FROM_EMAIL = config('ADMIN_EMAIL', 'ayushkmr397@gmail.com')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -265,3 +266,13 @@ TERMS_STORE_IP_ADDRESS = True
 TERMS_BASE_TEMPLATE = 'base.html'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# For monitoring
+OPENCENSUS = {
+    'TRACE': {
+        'SAMPLER': 'opencensus.trace.samplers.ProbabilitySampler(rate=1)',
+        'EXPORTER': '''opencensus.ext.azure.trace_exporter.AzureExporter(
+            connection_string="InstrumentationKey=e7b43f56-96e8-41ed-9182-b6ee2e5a8272;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/"
+        )''',
+    }
+}

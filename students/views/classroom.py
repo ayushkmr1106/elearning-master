@@ -16,9 +16,9 @@ class SignupView(TemplateView):
 def index(request):
     if request.user.is_authenticated:
          if request.user.is_teacher:
-             return redirect('teacher_quiz_change_list')
+             return redirect('course_list')
          else:
-             return redirect('student_quiz_list')
+             return redirect('course_list')
     else:
         return redirect('course_list')
 

@@ -32,7 +32,7 @@ class TeacherRegistrationView(CreateView):
     model = User
     template_name = 'registration/signup_form.html'
     form_class = TeacherSignupForm
-    success_url = reverse_lazy('teacher_quiz_change_list')
+    success_url = reverse_lazy('course_list')
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'teacher'

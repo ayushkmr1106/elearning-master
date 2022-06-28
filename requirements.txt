@@ -42,3 +42,4 @@ opencensus-ext-azure==1.1.4
 opencensus-ext-django==0.7.6
 azure-core==1.24.1
 azure-identity==1.10.0
+azure-servicebus

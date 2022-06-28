@@ -7,18 +7,37 @@ from django.core.mail import EmailMessage
 from django.template import loader
 from django.contrib import messages
 from django.utils.translation import gettext as _
+from azure.servicebus import ServiceBusClient, ServiceBusMessage
 
+from datetime import datetime
 
 class SignupView(TemplateView):
     template_name = 'registration/signup.html'
 
 
+def send_single_message(sender):
+    message = ServiceBusMessage("This is a test 2.")
+    sender.send_messages(message)
+
 def index(request):
+
+    CONNECTION_STR = "Endpoint=sb://servicebus-ayush.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=JXKkAdnphEMsoSQ8GyDDEJH0nt60j5oqULNBkGJz6fM="
+    QUEUE_NAME = "ayushqueue"
+
+    servicebus_client = ServiceBusClient.from_connection_string(conn_str=CONNECTION_STR, logging_enable=True)
     if request.user.is_authenticated:
-         if request.user.is_teacher:
-             return redirect('course_list')
-         else:
-             return redirect('course_list')
+        with servicebus_client:
+            sender = servicebus_client.get_queue_sender(queue_name=QUEUE_NAME)
+            with sender:
+                now = datetime.now()
+                now = now.strftime("%d/%m/%Y %H:%M:%S")
+                msg = f"{request.user} is loged in at {now}"
+                message = ServiceBusMessage(msg)
+                sender.send_messages(message)
+        if request.user.is_teacher:
+            return redirect('course_list')
+        else:
+            return redirect('course_list')
     else:
         return redirect('course_list')
 
